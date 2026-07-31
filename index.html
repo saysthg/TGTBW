@@ -1,105 +1,946 @@
-TOO GOOD / TO BEGIN WITH
-Work
-Shop
-About
-Contact
-BAG (0)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Too Good To Begin With — Visual Merchandising &amp; Styling Studio</title>
+<meta name="description" content="Too Good To Begin With — a visual merchandising and styling studio working across windows, retail, editorial and installation.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
 
+  /* ============================================================
+     TOKENS
+     ============================================================ */
+  :root{
+    --paper:      #E7E3D8;   /* stone / putty paper */
+    --paper-alt:  #F4F2EC;   /* lighter card surface */
+    --ink:        #15130D;   /* near-black warm ink */
+    --ink-soft:   #55503F;   /* secondary text */
+    --ink-faint:  #948E77;   /* tertiary / captions */
+    --line:       #C6C0AC;   /* hairline rule */
+    --accent:     #A32A1E;   /* gallery-label red — sparing use only */
+    --paper-rgb:  231,227,216;
 
+    --font-display: 'Fraunces', serif;
+    --font-body:    'Archivo', sans-serif;
+    --font-mono:    'IBM Plex Mono', monospace;
 
-VISUAL MERCHANDISING & STYLING STUDIO — EST. [YEAR]
-Too good to begin with.
-Let Inspiration bloom at the point of beginning.
-VIEW THE WORK START A PROJECT
-WINDOW DISPLAY
-RETAIL STYLING
-SET DESIGN
-ART DIRECTION
-INSTALLATION
-VISUAL STORYTELLING
-GALLERY
-RETAIL STYLING
-SET DESIGN
-ART DIRECTION
-INSTALLATION
-VISUAL STORYTELLING
-Selected Work
-A running catalogue of installations, windows and sets — filed the way a gallery would file its own collection.
-ALL
-WINDOW
-RETAIL
-EDITORIAL
-INSTALLATION
-IMAGE — 4:5
-No. 01
-Flagship Window, [Client]
-MEDIUM: WINDOW INSTALLATION — [YEAR]
-IMAGE — 4:5
-No. 02
-Store Relaunch, [Client]
-MEDIUM: RETAIL STYLING — [YEAR]
-IMAGE — 4:5
-No. 03
-Campaign Set, [Publication]
-MEDIUM: EDITORIAL STYLING — [YEAR]
-IMAGE — 4:5
-No. 04
-Pop-up Installation, [Client]
-MEDIUM: SPATIAL INSTALLATION — [YEAR]
-IMAGE — 4:5
-No. 05
-Seasonal Window, [Client]
-MEDIUM: WINDOW INSTALLATION — [YEAR]
-IMAGE — 4:5
-No. 06
-Concept Store, [Client]
-MEDIUM: RETAIL CONCEPT — [YEAR]
-The Edit
-A small, considered run of objects — restocked when it makes sense, not on a schedule.
-LOT 01
-PRODUCT — 4:5
-[Product Name]
-HOME OBJECT
-$—
-ADD TO BAG
-LOT 02
-PRODUCT — 4:5
-[Product Name]
-STYLING TOOL
-$—
-ADD TO BAG
-LOT 03
-PRODUCT — 4:5
-[Product Name]
-PRINT / EDITION
-$—
-ADD TO BAG
-NOTE — this shop grid is UI only. To take real payments, wire the "Add to bag" buttons to a commerce backend such as Shopify Buy Button, Snipcart, or Stripe Checkout, and swap the JS cart stub near the bottom of this file for that provider's SDK.
-ABOUT THE STUDIO
-Trained to look at a canvas before I ever looked at a shelf — the discipline carried over.
-	•	2001-2005 Fine Arts — [Institution], [Degree] 2005-2024 Practiced — visual merchandising & styling for [notable clients/brands] 2025 Founded Too Good To Begin With
-Stella is a visual merchandiser and stylist with a background in fine arts. The studio's work sits at the point where a gallery wall and a shop window ask the same question: what does this object need around it to be understood correctly.
-Recent projects have spanned flagship windows, retail concept development, editorial sets and temporary installations — always built from the same starting instinct: composition first, commerce second, and never the other way around.
-Available for retainer, project-based work, and consulting on visual identity for retail spaces.
-Start a Project
-studio@toogoodtobeginwith.com
-INSTAGRAM
-PINTEREST
-LINKEDIN
-NAME
+    --container: 1240px;
+    --gutter: clamp(20px, 4vw, 56px);
+  }
 
-EMAIL
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
+    *{ animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+  }
 
-PROJECT TYPE
-          Window / Retail Styling
-          Editorial / Set Styling
-          Installation
-          Consulting
-          Other
-        
-TELL ME ABOUT IT
-SEND INQUIRY
-Replies within 2–3 working days
-Too Good To Begin With
-© TOO GOOD TO BEGIN WITH  SAYSTHG STUDIO 2026
+  body{
+    margin:0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
 
+  img{ max-width:100%; display:block; }
+  a{ color: inherit; }
+  button{ font-family: inherit; cursor:pointer; }
+
+  :focus-visible{
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  .wrap{
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+  }
+
+  .eyebrow{
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  .section-heading{
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(32px, 5vw, 56px);
+    line-height: 1.05;
+    margin: 0;
+  }
+
+  .hairline{
+    border: none;
+    border-top: 1px solid var(--line);
+    margin: 0;
+  }
+
+  /* ============================================================
+     NAV
+     ============================================================ */
+  header.site-nav{
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(var(--paper-rgb), 0.86);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner{
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
+    padding: 18px var(--gutter);
+    max-width: var(--container);
+    margin: 0 auto;
+  }
+  .brand-mark{
+    font-family: var(--font-display);
+    font-size: 16px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  .brand-mark span{ color: var(--accent); }
+
+  nav.nav-links{
+    display:flex;
+    gap: 32px;
+    list-style:none;
+    margin:0; padding:0;
+  }
+  nav.nav-links a{
+    text-decoration:none;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink);
+    padding-bottom: 3px;
+    border-bottom: 1px solid transparent;
+    transition: border-color .2s ease, color .2s ease;
+  }
+  nav.nav-links a:hover{ border-color: var(--ink); }
+
+  .nav-right{ display:flex; align-items:center; gap:20px; }
+  .bag-btn{
+    background:none;
+    border: 1px solid var(--ink);
+    padding: 8px 14px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--ink);
+    transition: background .2s ease, color .2s ease;
+  }
+  .bag-btn:hover{ background: var(--ink); color: var(--paper); }
+
+  .menu-toggle{
+    display:none;
+    background:none; border:none;
+    flex-direction:column; gap:5px;
+    padding: 6px;
+  }
+  .menu-toggle span{ width:22px; height:1.5px; background:var(--ink); display:block; }
+
+  @media (max-width: 860px){
+    nav.nav-links{
+      position:fixed; top:63px; left:0; right:0; bottom:0;
+      background: var(--paper);
+      flex-direction:column;
+      gap:0;
+      padding: 10px var(--gutter) 40px;
+      transform: translateY(-110%);
+      transition: transform .35s ease;
+      overflow-y:auto;
+    }
+    nav.nav-links.open{ transform: translateY(0); }
+    nav.nav-links a{
+      padding: 18px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 20px;
+      font-family: var(--font-display);
+      text-transform:none;
+      letter-spacing:0;
+    }
+    .menu-toggle{ display:flex; }
+  }
+
+  /* ============================================================
+     HERO
+     ============================================================ */
+  .hero{
+    min-height: 88vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    padding: 90px var(--gutter) 60px;
+    max-width: var(--container);
+    margin: 0 auto;
+  }
+  .hero .eyebrow{ margin-bottom: 22px; }
+  .hero h1{
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(52px, 11vw, 148px);
+    line-height: 0.92;
+    margin: 0 0 30px;
+    letter-spacing: -0.01em;
+  }
+  .hero h1 em{
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent);
+  }
+  .hero-sub{
+    max-width: 560px;
+    font-size: clamp(16px, 1.6vw, 19px);
+    color: var(--ink-soft);
+    margin: 0 0 40px;
+  }
+  .hero-cta{
+    display:flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding: 14px 26px;
+    text-decoration:none;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-family: var(--font-mono);
+    transition: all .2s ease;
+  }
+  .btn-solid{ background: var(--ink); color: var(--paper); border: 1px solid var(--ink); }
+  .btn-solid:hover{ background: transparent; color: var(--ink); }
+  .btn-line{ border: 1px solid var(--ink); color: var(--ink); }
+  .btn-line:hover{ background: var(--ink); color: var(--paper); }
+
+  /* ============================================================
+     MARQUEE
+     ============================================================ */
+  .marquee{
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 16px 0;
+    background: var(--paper-alt);
+  }
+  .marquee-track{
+    display:inline-flex;
+    gap: 40px;
+    animation: scroll-marquee 32s linear infinite;
+  }
+  @keyframes scroll-marquee{
+    from{ transform: translateX(0); }
+    to{ transform: translateX(-50%); }
+  }
+  .marquee-track span{
+    font-family: var(--font-mono);
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .marquee-track span::after{
+    content: '—';
+    margin-left: 40px;
+    color: var(--accent);
+  }
+
+  /* ============================================================
+     SECTION GENERIC
+     ============================================================ */
+  section{ padding: 100px var(--gutter); max-width: var(--container); margin: 0 auto; }
+  .section-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap: 24px;
+    margin-bottom: 56px;
+    flex-wrap: wrap;
+  }
+  .section-head p{
+    max-width: 360px;
+    color: var(--ink-soft);
+    margin: 0;
+    font-size: 15px;
+  }
+
+  /* ============================================================
+     WORK / GALLERY
+     ============================================================ */
+  .filters{
+    display:flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 44px;
+  }
+  .filter-chip{
+    background: none;
+    border: 1px solid var(--line);
+    padding: 8px 16px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    transition: all .2s ease;
+  }
+  .filter-chip:hover{ border-color: var(--ink); color: var(--ink); }
+  .filter-chip.active{ background: var(--ink); border-color: var(--ink); color: var(--paper); }
+
+  .gallery-grid{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 42px 32px;
+  }
+  @media (max-width: 900px){ .gallery-grid{ grid-template-columns: repeat(2,1fr); } }
+  @media (max-width: 600px){ .gallery-grid{ grid-template-columns: 1fr; } }
+
+  .work-item{ display:block; }
+  .work-item.hidden{ display:none; }
+
+  .placeholder-img{
+    width:100%;
+    aspect-ratio: 4/5;
+    background:
+      repeating-linear-gradient(135deg, rgba(21,19,13,0.06) 0 2px, transparent 2px 14px),
+      var(--paper-alt);
+    border: 1px solid var(--line);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding: 20px;
+  }
+  .placeholder-img span{
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+  .gallery-grid .placeholder-img{ transition: opacity .25s ease; }
+  .work-item:hover .placeholder-img{ opacity: 0.72; }
+
+  .work-label{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid var(--line);
+    gap: 12px;
+  }
+  .work-label .num{
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--accent);
+    white-space:nowrap;
+  }
+  .work-label .meta{ text-align:right; }
+  .work-title{
+    font-family: var(--font-display);
+    font-size: 19px;
+    margin: 0 0 2px;
+  }
+  .work-medium{
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin:0;
+  }
+
+  /* ============================================================
+     SHOP
+     ============================================================ */
+  .shop-grid{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 42px 32px;
+  }
+  @media (max-width: 900px){ .shop-grid{ grid-template-columns: repeat(2,1fr); } }
+  @media (max-width: 600px){ .shop-grid{ grid-template-columns: 1fr; } }
+
+  .product{ position:relative; }
+  .tag-corner{
+    position:absolute;
+    top: 14px; left: 14px;
+    background: var(--accent);
+    color: var(--paper-alt);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    text-transform:uppercase;
+    padding: 4px 9px;
+    z-index: 2;
+  }
+  .product-info{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    margin-top: 14px;
+    gap: 10px;
+  }
+  .product-title{
+    font-family: var(--font-display);
+    font-size: 18px;
+    margin: 0 0 4px;
+  }
+  .product-cat{
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    margin:0;
+  }
+  .product-price{
+    font-family: var(--font-mono);
+    font-size: 15px;
+    white-space: nowrap;
+  }
+  .add-btn{
+    margin-top: 14px;
+    width:100%;
+    background:none;
+    border: 1px solid var(--ink);
+    padding: 12px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: all .2s ease;
+  }
+  .add-btn:hover{ background: var(--ink); color: var(--paper); }
+
+  .shop-note{
+    margin-top: 60px;
+    padding: 20px;
+    border: 1px dashed var(--line);
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    line-height:1.7;
+  }
+
+  /* ============================================================
+     ABOUT
+     ============================================================ */
+  .about-grid{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 70px;
+    align-items:start;
+  }
+  @media (max-width: 800px){ .about-grid{ grid-template-columns:1fr; gap:40px; } }
+
+  .pull-quote{
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(24px, 2.6vw, 34px);
+    line-height: 1.35;
+    margin: 0;
+  }
+  .pull-quote span{ color: var(--accent); font-style:normal; }
+
+  .about-body p{ color: var(--ink-soft); margin: 0 0 18px; }
+
+  .timeline{ list-style:none; margin: 34px 0 0; padding:0; }
+  .timeline li{
+    display:grid;
+    grid-template-columns: 90px 1fr;
+    gap: 18px;
+    padding: 16px 0;
+    border-top: 1px solid var(--line);
+  }
+  .timeline .yr{ font-family: var(--font-mono); font-size:12px; color: var(--ink-faint); }
+  .timeline .role{ font-size: 14.5px; color: var(--ink); }
+  .timeline .role strong{ font-weight:600; }
+
+  /* ============================================================
+     CONTACT
+     ============================================================ */
+  .contact-grid{
+    display:grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 70px;
+  }
+  @media (max-width: 800px){ .contact-grid{ grid-template-columns:1fr; gap:40px; } }
+
+  .contact-details a{
+    display:block;
+    text-decoration:none;
+    font-family: var(--font-display);
+    font-size: 22px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid transparent;
+    width: fit-content;
+  }
+  .contact-details a:hover{ border-color: var(--ink); }
+  .social-row{ display:flex; gap:18px; margin-top: 30px; }
+  .social-row a{
+    font-family: var(--font-mono);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    text-decoration: none;
+    border-bottom: 1px solid var(--line);
+  }
+
+  form.contact-form{ display:flex; flex-direction:column; gap: 22px; }
+  .field{ display:flex; flex-direction:column; gap:8px; }
+  .field label{
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .field input, .field select, .field textarea{
+    background: var(--paper-alt);
+    border: 1px solid var(--line);
+    padding: 12px 14px;
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: var(--ink);
+  }
+  .field textarea{ resize: vertical; min-height: 110px; }
+  .field input:focus, .field select:focus, .field textarea:focus{
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+  }
+  .submit-row{ display:flex; align-items:center; gap: 18px; }
+  .form-note{ font-size:12px; color: var(--ink-faint); font-family: var(--font-mono); }
+
+  /* ============================================================
+     FOOTER
+     ============================================================ */
+  footer{
+    border-top: 1px solid var(--line);
+    padding: 50px var(--gutter) 30px;
+  }
+  .footer-inner{
+    max-width: var(--container);
+    margin: 0 auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    flex-wrap:wrap;
+    gap: 24px;
+  }
+  .footer-mark{
+    font-family: var(--font-display);
+    font-size: clamp(28px, 5vw, 46px);
+    margin: 0;
+  }
+  .footer-meta{
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--ink-faint);
+    text-transform:uppercase;
+    letter-spacing:.05em;
+    text-align:right;
+  }
+
+  /* ============================================================
+     TOAST
+     ============================================================ */
+  .toast{
+    position: fixed;
+    bottom: 26px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    padding: 14px 22px;
+    letter-spacing: .02em;
+    opacity:0;
+    pointer-events:none;
+    transition: opacity .25s ease, transform .25s ease;
+    z-index: 200;
+    max-width: 90vw;
+    text-align:center;
+  }
+  .toast.show{ opacity:1; transform: translateX(-50%) translateY(0); }
+
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     NAV
+     ============================================================ -->
+<header class="site-nav">
+  <div class="nav-inner">
+    <a href="#home" class="brand-mark">Too Good <span>/</span> To Begin With</a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#work">Work</a>
+      <a href="#shop">Shop</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="nav-right">
+      <button class="bag-btn" id="bagBtn">Bag (0)</button>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section class="hero" id="home">
+  <p class="eyebrow"><!-- EDIT: your city / founding year --> Visual Merchandising &amp; Styling Studio — Est. [Year]</p>
+  <h1>Too good<br>to <em>begin</em><br>with.</h1>
+  <p class="hero-sub">
+    <!-- EDIT: your positioning statement -->
+    A styling and merchandising practice for brands who'd rather get it right than get it out fast.
+    Windows, retail interiors, sets and shelf-edges, treated like the compositions they are.
+  </p>
+  <div class="hero-cta">
+    <a href="#work" class="btn btn-solid">View the work</a>
+    <a href="#contact" class="btn btn-line">Start a project</a>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Window Display</span><span>Retail Styling</span><span>Set Design</span><span>Art Direction</span><span>Installation</span><span>Visual Storytelling</span>
+    <span>Window Display</span><span>Retail Styling</span><span>Set Design</span><span>Art Direction</span><span>Installation</span><span>Visual Storytelling</span>
+  </div>
+</div>
+
+<!-- ============================================================
+     WORK
+     ============================================================ -->
+<section id="work">
+  <div class="section-head">
+    <h2 class="section-heading">Selected<br>Work</h2>
+    <p><!-- EDIT: intro line for your portfolio --> A running catalogue of installations, windows and sets — filed the way a gallery would file its own collection.</p>
+  </div>
+
+  <div class="filters" id="filters">
+    <button class="filter-chip active" data-filter="all">All</button>
+    <button class="filter-chip" data-filter="window">Window</button>
+    <button class="filter-chip" data-filter="retail">Retail</button>
+    <button class="filter-chip" data-filter="editorial">Editorial</button>
+    <button class="filter-chip" data-filter="installation">Installation</button>
+  </div>
+
+  <div class="gallery-grid" id="galleryGrid">
+    <!-- EDIT: replace each placeholder-img div with <img src="..." alt="..."> and update the labels -->
+    <a href="#" class="work-item" data-cat="window">
+      <div class="placeholder-img"><span>Image — 4:5</span></div>
+      <div class="work-label">
+        <span class="num">No. 01</span>
+        <div class="meta">
+          <p class="work-title">Flagship Window, [Client]</p>
+          <p class="work-medium">Medium: Window Installation — [Year]</p>
+        </div>
+      </div>
+    </a>
+    <a href="#" class="work-item" data-cat="retail">
+      <div class="placeholder-img"><span>Image — 4:5</span></div>
+      <div class="work-label">
+        <span class="num">No. 02</span>
+        <div class="meta">
+          <p class="work-title">Store Relaunch, [Client]</p>
+          <p class="work-medium">Medium: Retail Styling — [Year]</p>
+        </div>
+      </div>
+    </a>
+    <a href="#" class="work-item" data-cat="editorial">
+      <div class="placeholder-img"><span>Image — 4:5</span></div>
+      <div class="work-label">
+        <span class="num">No. 03</span>
+        <div class="meta">
+          <p class="work-title">Campaign Set, [Publication]</p>
+          <p class="work-medium">Medium: Editorial Styling — [Year]</p>
+        </div>
+      </div>
+    </a>
+    <a href="#" class="work-item" data-cat="installation">
+      <div class="placeholder-img"><span>Image — 4:5</span></div>
+      <div class="work-label">
+        <span class="num">No. 04</span>
+        <div class="meta">
+          <p class="work-title">Pop-up Installation, [Client]</p>
+          <p class="work-medium">Medium: Spatial Installation — [Year]</p>
+        </div>
+      </div>
+    </a>
+    <a href="#" class="work-item" data-cat="window">
+      <div class="placeholder-img"><span>Image — 4:5</span></div>
+      <div class="work-label">
+        <span class="num">No. 05</span>
+        <div class="meta">
+          <p class="work-title">Seasonal Window, [Client]</p>
+          <p class="work-medium">Medium: Window Installation — [Year]</p>
+        </div>
+      </div>
+    </a>
+    <a href="#" class="work-item" data-cat="retail">
+      <div class="placeholder-img"><span>Image — 4:5</span></div>
+      <div class="work-label">
+        <span class="num">No. 06</span>
+        <div class="meta">
+          <p class="work-title">Concept Store, [Client]</p>
+          <p class="work-medium">Medium: Retail Concept — [Year]</p>
+        </div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ============================================================
+     SHOP
+     ============================================================ -->
+<section id="shop">
+  <div class="section-head">
+    <h2 class="section-heading">The Edit</h2>
+    <p><!-- EDIT: intro line for your shop --> A small, considered run of objects — restocked when it makes sense, not on a schedule.</p>
+  </div>
+
+  <div class="shop-grid" id="shopGrid">
+    <!-- EDIT: replace each product block with your real items -->
+    <div class="product">
+      <span class="tag-corner">Lot 01</span>
+      <div class="placeholder-img"><span>Product — 4:5</span></div>
+      <div class="product-info">
+        <div>
+          <p class="product-title">[Product Name]</p>
+          <p class="product-cat">Home Object</p>
+        </div>
+        <span class="product-price">$—</span>
+      </div>
+      <button class="add-btn" data-product="[Product Name]">Add to bag</button>
+    </div>
+    <div class="product">
+      <span class="tag-corner">Lot 02</span>
+      <div class="placeholder-img"><span>Product — 4:5</span></div>
+      <div class="product-info">
+        <div>
+          <p class="product-title">[Product Name]</p>
+          <p class="product-cat">Styling Tool</p>
+        </div>
+        <span class="product-price">$—</span>
+      </div>
+      <button class="add-btn" data-product="[Product Name]">Add to bag</button>
+    </div>
+    <div class="product">
+      <span class="tag-corner">Lot 03</span>
+      <div class="placeholder-img"><span>Product — 4:5</span></div>
+      <div class="product-info">
+        <div>
+          <p class="product-title">[Product Name]</p>
+          <p class="product-cat">Print / Edition</p>
+        </div>
+        <span class="product-price">$—</span>
+      </div>
+      <button class="add-btn" data-product="[Product Name]">Add to bag</button>
+    </div>
+  </div>
+
+  <div class="shop-note">
+    NOTE — this shop grid is UI only. To take real payments, wire the "Add to bag" buttons to a
+    commerce backend such as Shopify Buy Button, Snipcart, or Stripe Checkout, and swap the JS
+    cart stub near the bottom of this file for that provider's SDK.
+  </div>
+</section>
+
+<!-- ============================================================
+     ABOUT
+     ============================================================ -->
+<section id="about">
+  <div class="about-grid">
+    <div>
+      <p class="eyebrow" style="margin-bottom:20px;">About the studio</p>
+      <p class="pull-quote">
+        <!-- EDIT: your pull quote -->
+        Trained to look at a canvas before I ever looked at a shelf — <span>the discipline carried over.</span>
+      </p>
+
+      <ul class="timeline">
+        <li>
+          <span class="yr">[Year]</span>
+          <span class="role"><strong>Fine Arts</strong> — [Institution], [Degree]</span>
+        </li>
+        <li>
+          <span class="yr">[Year]</span>
+          <span class="role"><strong>Practiced</strong> — visual merchandising &amp; styling for [notable clients/brands]</span>
+        </li>
+        <li>
+          <span class="yr">[Year]</span>
+          <span class="role"><strong>Founded</strong> Too Good To Begin With</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="about-body">
+      <!-- EDIT: your bio, 2-3 short paragraphs -->
+      <p>
+        [Your name] is a visual merchandiser and stylist with a background in fine arts. The studio's
+        work sits at the point where a gallery wall and a shop window ask the same question: what does
+        this object need around it to be understood correctly.
+      </p>
+      <p>
+        Recent projects have spanned flagship windows, retail concept development, editorial sets and
+        temporary installations — always built from the same starting instinct: composition first,
+        commerce second, and never the other way around.
+      </p>
+      <p>
+        Available for retainer, project-based work, and consulting on visual identity for retail spaces.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CONTACT
+     ============================================================ -->
+<section id="contact">
+  <div class="section-head">
+    <h2 class="section-heading">Start a<br>Project</h2>
+  </div>
+
+  <div class="contact-grid">
+    <div class="contact-details">
+      <!-- EDIT: your real contact details -->
+      <a href="mailto:studio@toogoodtobeginwith.com">studio@toogoodtobeginwith.com</a>
+      <a href="tel:+000000000">+[Your phone]</a>
+      <div class="social-row">
+        <a href="#">Instagram</a>
+        <a href="#">Pinterest</a>
+        <a href="#">LinkedIn</a>
+      </div>
+    </div>
+
+    <form class="contact-form" id="contactForm">
+      <div class="field">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      <div class="field">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div class="field">
+        <label for="project">Project type</label>
+        <select id="project" name="project">
+          <option>Window / Retail Styling</option>
+          <option>Editorial / Set Styling</option>
+          <option>Installation</option>
+          <option>Consulting</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="message">Tell me about it</label>
+        <textarea id="message" name="message" required></textarea>
+      </div>
+      <div class="submit-row">
+        <button type="submit" class="btn btn-solid">Send inquiry</button>
+        <span class="form-note">Replies within 2–3 working days</span>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer>
+  <div class="footer-inner">
+    <p class="footer-mark">Too Good<br>To Begin With</p>
+    <p class="footer-meta">© <span id="year"></span> Too Good To Begin With<br>Visual Merchandising &amp; Styling Studio</p>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  // Year stamp
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Mobile menu
+  const menuToggle = document.getElementById('menuToggle');
+  const navLinks = document.getElementById('navLinks');
+  menuToggle.addEventListener('click', () => {
+    const open = navLinks.classList.toggle('open');
+    menuToggle.setAttribute('aria-expanded', open);
+  });
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+    menuToggle.setAttribute('aria-expanded', 'false');
+  }));
+
+  // Gallery filter
+  const filters = document.getElementById('filters');
+  const items = document.querySelectorAll('#galleryGrid .work-item');
+  filters.addEventListener('click', (e) => {
+    const btn = e.target.closest('.filter-chip');
+    if (!btn) return;
+    filters.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    const f = btn.dataset.filter;
+    items.forEach(item => {
+      item.classList.toggle('hidden', f !== 'all' && item.dataset.cat !== f);
+    });
+  });
+
+  // Toast helper
+  const toast = document.getElementById('toast');
+  let toastTimer;
+  function showToast(msg){
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove('show'), 2600);
+  }
+
+  // Cart stub — client-side only. Swap for a real commerce SDK when ready.
+  let cartCount = 0;
+  const bagBtn = document.getElementById('bagBtn');
+  document.querySelectorAll('.add-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      cartCount++;
+      bagBtn.textContent = `Bag (${cartCount})`;
+      showToast(`Added "${btn.dataset.product}" — connect a commerce backend to complete checkout.`);
+    });
+  });
+
+  // Contact form stub — replace with a real submit handler (Formspree, backend endpoint, etc.)
+  document.getElementById('contactForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    showToast('Form captured — connect this to your email service or backend to receive inquiries.');
+    e.target.reset();
+  });
+</script>
+
+</body>
+</html>
