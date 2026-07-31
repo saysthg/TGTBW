@@ -1,176 +1,105 @@
-SW-website/
-│── index.html <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stella — Portfolio</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+TOO GOOD / TO BEGIN WITH
+Work
+Shop
+About
+Contact
+BAG (0)
 
-    <!-- Navigation -->
-    <nav class="nav">
-        <h1 class="logo">Stella</h1>
-        <ul class="nav-links">
-            <li><a href="#about">About</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </nav>
 
-    <!-- Hero -->
-    <header class="hero">
-        <div class="hero-content">
-            <h2 class="hero-title">Crafting Elegant Digital Experiences</h2>
-            <p class="hero-subtitle">Developer • Designer • Creator</p>
-            <a href="#projects" class="btn-primary">Explore My Work</a>
-        </div>
-    </header>
 
-    <!-- About -->
-    <section id="about" class="section fade-in">
-        <h2 class="section-title">About Me</h2>
-        <p class="section-text">
-            I’m Stella, a London‑based developer focused on building refined, 
-            user‑centric digital products. My work blends clean aesthetics with 
-            thoughtful interactions.
-        </p>
-    </section>
+VISUAL MERCHANDISING & STYLING STUDIO — EST. [YEAR]
+Too good to begin with.
+Let Inspiration bloom at the point of beginning.
+VIEW THE WORK START A PROJECT
+WINDOW DISPLAY
+RETAIL STYLING
+SET DESIGN
+ART DIRECTION
+INSTALLATION
+VISUAL STORYTELLING
+GALLERY
+RETAIL STYLING
+SET DESIGN
+ART DIRECTION
+INSTALLATION
+VISUAL STORYTELLING
+Selected Work
+A running catalogue of installations, windows and sets — filed the way a gallery would file its own collection.
+ALL
+WINDOW
+RETAIL
+EDITORIAL
+INSTALLATION
+IMAGE — 4:5
+No. 01
+Flagship Window, [Client]
+MEDIUM: WINDOW INSTALLATION — [YEAR]
+IMAGE — 4:5
+No. 02
+Store Relaunch, [Client]
+MEDIUM: RETAIL STYLING — [YEAR]
+IMAGE — 4:5
+No. 03
+Campaign Set, [Publication]
+MEDIUM: EDITORIAL STYLING — [YEAR]
+IMAGE — 4:5
+No. 04
+Pop-up Installation, [Client]
+MEDIUM: SPATIAL INSTALLATION — [YEAR]
+IMAGE — 4:5
+No. 05
+Seasonal Window, [Client]
+MEDIUM: WINDOW INSTALLATION — [YEAR]
+IMAGE — 4:5
+No. 06
+Concept Store, [Client]
+MEDIUM: RETAIL CONCEPT — [YEAR]
+The Edit
+A small, considered run of objects — restocked when it makes sense, not on a schedule.
+LOT 01
+PRODUCT — 4:5
+[Product Name]
+HOME OBJECT
+$—
+ADD TO BAG
+LOT 02
+PRODUCT — 4:5
+[Product Name]
+STYLING TOOL
+$—
+ADD TO BAG
+LOT 03
+PRODUCT — 4:5
+[Product Name]
+PRINT / EDITION
+$—
+ADD TO BAG
+NOTE — this shop grid is UI only. To take real payments, wire the "Add to bag" buttons to a commerce backend such as Shopify Buy Button, Snipcart, or Stripe Checkout, and swap the JS cart stub near the bottom of this file for that provider's SDK.
+ABOUT THE STUDIO
+Trained to look at a canvas before I ever looked at a shelf — the discipline carried over.
+	•	2001-2005 Fine Arts — [Institution], [Degree] 2005-2024 Practiced — visual merchandising & styling for [notable clients/brands] 2025 Founded Too Good To Begin With
+Stella is a visual merchandiser and stylist with a background in fine arts. The studio's work sits at the point where a gallery wall and a shop window ask the same question: what does this object need around it to be understood correctly.
+Recent projects have spanned flagship windows, retail concept development, editorial sets and temporary installations — always built from the same starting instinct: composition first, commerce second, and never the other way around.
+Available for retainer, project-based work, and consulting on visual identity for retail spaces.
+Start a Project
+studio@toogoodtobeginwith.com
+INSTAGRAM
+PINTEREST
+LINKEDIN
+NAME
 
-    <!-- Projects -->
-    <section id="projects" class="section fade-in">
-        <h2 class="section-title">Featured Projects</h2>
-        <div class="grid">
-            <div class="card">
-                <h3>Luxury Landing Page</h3>
-                <p>High‑end brand site with smooth animations and premium typography.</p>
-            </div>
-            <div class="card">
-                <h3>Portfolio Redesign</h3>
-                <p>A refined personal brand with elegant UI and subtle motion.</p>
-            </div>
-            <div class="card">
-                <h3>Interactive Showcase</h3>
-                <p>Dynamic project gallery with custom transitions and filters.</p>
-            </div>
-        </div>
-    </section>
+EMAIL
 
-    <!-- Contact -->
-    <section id="contact" class="section fade-in">
-        <h2 class="section-title">Let’s Connect</h2>
-        <form class="contact-form">
-            <input type="text" placeholder="Your Name" required>
-            <input type="email" placeholder="Your Email" required>
-            <textarea placeholder="Your Message" required></textarea>
-            <button class="btn-primary" type="submit">Send Message</button>
-        </form>
-    </section>
-
-    <script src="script.js"></script>
-</body>
-</html>
-
-│── style.css /* Premium Colour Palette */
-:root {
-    --navy: #0d1b2a;
-    --gold: #d4af37;
-    --light: #f5f5f5;
-    --grey: #8a8a8a;
-    --white: #ffffff;
-}
-
-/* Global */
-body {
-    margin: 0;
-    font-family: 'Inter', sans-serif;
-    background: var(--light);
-    color: var(--navy);
-}
-
-/* Navigation */
-.nav {
-    display: flex;
-    justify-content: space-between;
-    padding: 25px 40px;
-    background: var(--navy);
-    color: var(--white);
-}
-.logo {
-    font-size: 1.5rem;
-    font-weight: 700;
-    letter-spacing: 1px;
-}
-.nav-links {
-    list-style: none;
-    display: flex;
-    gap: 25px;
-}
-.nav-links a {
-    color: var(--white);
-    text-decoration: none;
-    font-weight: 500;
-}
-
-/* Hero */
-.hero {
-    height: 80vh;
-    background: linear-gradient(135deg, #0d1b2a, #1b263b);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: var(--white);
-}
-.hero-title {
-    font-size: 3rem;
-    font-family: 'Playfair Display', serif;
-}
-.hero-subtitle {
-    font-size: 1.2rem;
-    margin: 10px 0 30px;
-}
-.btn-primary {
-    padding: 12px 30px;
-    background: var(--gold);
-    color: var(--navy);
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: 600;
-}
-
-/* Sections */
-.section {
-    max-width: 900px;
-    margin: 80px auto;
-    padding: 0 20px;
-}
-.section-title {
-    font-size: 2rem;
-    font-family: 'Playfair Display', serif;
-    margin-bottom: 20px;
-}
-.section-text {
-    font-size: 1.1rem;
-    color: var(--grey);
-}
-
-/* Projects Grid */
-.grid {
-    display: grid;
-    gap: 25px;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-}
-.card {
-    background: var(--white);
-    padding: 25px
-└── script.js // Smooth scrolling for navigation links
-document.querySelectorAll("nav a").forEach(link => {
-    link.addEventListener("click", e => {
-        e.preventDefault();
-        const target = document.querySelector(e.target.getAttribute("href"));
-        target.scrollIntoView({ behavior: "smooth" });
-    });
-});
+PROJECT TYPE
+          Window / Retail Styling
+          Editorial / Set Styling
+          Installation
+          Consulting
+          Other
+        
+TELL ME ABOUT IT
+SEND INQUIRY
+Replies within 2–3 working days
+Too Good To Begin With
+© TOO GOOD TO BEGIN WITH  SAYSTHG STUDIO 2026
 
