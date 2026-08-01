@@ -381,6 +381,176 @@
   }
 
   /* ============================================================
+     VIRTUAL GALLERY
+     ============================================================ */
+  .vgallery-intro{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+  .vgallery-status{
+    display:inline-flex;
+    align-items:center;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .vgallery-status .dot{
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--accent);
+    display:inline-block;
+  }
+
+  .vgallery-grid{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 42px 32px;
+    margin-top: 44px;
+  }
+  @media (max-width: 900px){ .vgallery-grid{ grid-template-columns: repeat(2,1fr); } }
+  @media (max-width: 600px){ .vgallery-grid{ grid-template-columns: 1fr; } }
+
+  .vgallery-card{
+    background: none;
+    border: none;
+    padding: 0;
+    text-align: left;
+    width: 100%;
+    font-family: inherit;
+    color: inherit;
+  }
+  .vgallery-card .frame{
+    position: relative;
+    aspect-ratio: 4/5;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    background: var(--paper-alt);
+  }
+  .vgallery-card .frame img{
+    width:100%; height:100%;
+    object-fit: cover;
+    display:block;
+    transition: transform .5s ease;
+  }
+  .vgallery-card:hover .frame img{ transform: scale(1.04); }
+  .vgallery-card .badge{
+    position:absolute;
+    top:14px; right:14px;
+    background: rgba(var(--paper-rgb), 0.92);
+    border: 1px solid var(--line);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    text-transform:uppercase;
+    padding: 4px 9px;
+  }
+  .vgallery-label{
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid var(--line);
+  }
+  .vgallery-label .vg-title{
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 19px;
+    margin: 0 0 2px;
+  }
+  .vgallery-label .vg-artist{
+    font-size: 14px;
+    color: var(--ink-soft);
+    margin: 0 0 6px;
+  }
+  .vgallery-label .vg-meta{
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    margin: 0;
+  }
+  .vgallery-empty{
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--ink-faint);
+    padding: 40px 0;
+    border-top: 1px solid var(--line);
+    margin-top: 20px;
+  }
+
+  /* Lightbox */
+  .lightbox{
+    position: fixed;
+    inset: 0;
+    background: rgba(21,19,13,0.92);
+    z-index: 300;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px var(--gutter);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .25s ease;
+  }
+  .lightbox.show{ opacity: 1; pointer-events: auto; }
+  .lightbox-inner{
+    max-width: 900px;
+    width: 100%;
+    max-height: 90vh;
+    display:flex;
+    flex-direction:column;
+    gap: 18px;
+  }
+  .lightbox-inner img{
+    width:100%;
+    max-height: 70vh;
+    object-fit: contain;
+    border: 1px solid rgba(231,227,216,0.25);
+  }
+  .lightbox-caption{
+    color: var(--paper);
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .lightbox-caption .vg-title{
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 22px;
+    margin: 0 0 4px;
+  }
+  .lightbox-caption .vg-artist{
+    font-size: 14px;
+    color: rgba(231,227,216,0.75);
+    margin: 0;
+  }
+  .lightbox-caption .vg-desc{
+    font-size: 13.5px;
+    color: rgba(231,227,216,0.65);
+    margin: 8px 0 0;
+    max-width: 480px;
+  }
+  .lightbox-close{
+    background:none;
+    border: 1px solid rgba(231,227,216,0.4);
+    color: var(--paper);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 8px 16px;
+    white-space: nowrap;
+  }
+  .lightbox-close:hover{ background: rgba(231,227,216,0.12); }
+
+  /* ============================================================
      SHOP
      ============================================================ */
   .shop-grid{
@@ -606,6 +776,7 @@
     <a href="#home" class="brand-mark">Too Good <span>/</span> To Begin With</a>
     <nav class="nav-links" id="navLinks">
       <a href="#work">Work</a>
+      <a href="#virtual-gallery">Gallery</a>
       <a href="#shop">Shop</a>
       <a href="#about">About</a>
       <a href="#contact">Contact</a>
@@ -731,6 +902,51 @@
     </a>
   </div>
 </section>
+
+<!-- ============================================================
+     VIRTUAL GALLERY
+     — a rotating online exhibition, separate from the portfolio above.
+     EDIT: you never need to touch this HTML to add or remove artwork.
+     Scroll to the <script> at the bottom of the file, find the
+     "galleryArtworks" array, and add/remove/edit entries there — this
+     section rebuilds itself from that list automatically. That's the
+     "drop and insert" part.
+     ============================================================ -->
+<section id="virtual-gallery">
+  <div class="vgallery-intro">
+    <div>
+      <p class="eyebrow" style="margin-bottom:14px;">Virtual Gallery</p>
+      <h2 class="section-heading">Current<br>Exhibition</h2>
+    </div>
+    <span class="vgallery-status"><span class="dot"></span> On view now</span>
+  </div>
+  <p style="max-width:420px;color:var(--ink-soft);margin:16px 0 0;">
+    <!-- EDIT: your exhibition intro line --> A small, changing selection of artwork exhibited
+    online — swapped out as new pieces come through the studio.
+  </p>
+
+  <div class="vgallery-grid" id="vgalleryGrid">
+    <!-- populated automatically from galleryArtworks in the script below -->
+  </div>
+  <p class="vgallery-empty" id="vgalleryEmpty" style="display:none;">
+    Nothing on view right now — check back soon.
+  </p>
+</section>
+
+<!-- Lightbox — opens when a Virtual Gallery piece is clicked -->
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-inner">
+    <img id="lightboxImg" src="" alt="">
+    <div class="lightbox-caption">
+      <div>
+        <p class="vg-title" id="lightboxTitle"></p>
+        <p class="vg-artist" id="lightboxArtist"></p>
+        <p class="vg-desc" id="lightboxDesc"></p>
+      </div>
+      <button class="lightbox-close" id="lightboxClose">Close ✕</button>
+    </div>
+  </div>
+</div>
 
 <!-- ============================================================
      SHOP
@@ -901,6 +1117,118 @@
 <script>
   // Year stamp
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  /* ============================================================
+     VIRTUAL GALLERY — DROP-AND-INSERT ARTWORK LIST
+     ============================================================
+     To add a new piece: copy one object below, paste it into the array,
+     and edit the fields. To remove a piece: delete its object. To swap
+     what's "on view": just change the "status" field. Nothing else in
+     the file needs to change — the gallery section rebuilds itself from
+     this list every time the page loads.
+
+     Fields:
+       title       — artwork title
+       artist      — artist name (yours, or a guest artist you're exhibiting)
+       year        — year created
+       medium      — e.g. "Oil on canvas", "Mixed media", "Photography"
+       image       — path or URL to the image
+       description — one short line, shown in the enlarged lightbox view
+       status      — "current"  = shown with the "On View" badge
+                     "upcoming" = shown with an "Upcoming" badge
+                     "past"     = shown with an "Archived" badge
+  */
+  const galleryArtworks = [
+    {
+      title: "Still Life, Reframed",
+      artist: "[Artist Name]",
+      year: "2025",
+      medium: "Oil on canvas",
+      image: "https://picsum.photos/seed/tggtbwart01/900/1125",
+      description: "[Your description — materials, size, context, or the story behind the piece.]",
+      status: "current"
+    },
+    {
+      title: "Composition No. 4",
+      artist: "[Artist Name]",
+      year: "2024",
+      medium: "Mixed media on paper",
+      image: "https://picsum.photos/seed/tggtbwart02/900/1125",
+      description: "[Your description — materials, size, context, or the story behind the piece.]",
+      status: "current"
+    },
+    {
+      title: "Interior, Late Light",
+      artist: "[Artist Name]",
+      year: "2024",
+      medium: "Photography, archival print",
+      image: "https://picsum.photos/seed/tggtbwart03/900/1125",
+      description: "[Your description — materials, size, context, or the story behind the piece.]",
+      status: "current"
+    },
+    {
+      title: "Untitled Study",
+      artist: "[Artist Name]",
+      year: "2026",
+      medium: "Charcoal on paper",
+      image: "https://picsum.photos/seed/tggtbwart04/900/1125",
+      description: "[Your description — materials, size, context, or the story behind the piece.]",
+      status: "upcoming"
+    }
+  ];
+
+  const statusLabel = { current: "On view", upcoming: "Upcoming", past: "Archived" };
+
+  function renderVirtualGallery(){
+    const grid = document.getElementById('vgalleryGrid');
+    const empty = document.getElementById('vgalleryEmpty');
+    grid.innerHTML = '';
+
+    if (!galleryArtworks.length){
+      empty.style.display = 'block';
+      return;
+    }
+    empty.style.display = 'none';
+
+    galleryArtworks.forEach((art, i) => {
+      const card = document.createElement('button');
+      card.className = 'vgallery-card';
+      card.type = 'button';
+      card.setAttribute('aria-label', `View ${art.title} by ${art.artist}`);
+      card.innerHTML = `
+        <div class="frame">
+          <img src="${art.image}" alt="${art.title}, ${art.artist}" loading="lazy">
+          <span class="badge">${statusLabel[art.status] || art.status}</span>
+        </div>
+        <div class="vgallery-label">
+          <p class="vg-title">${art.title}</p>
+          <p class="vg-artist">${art.artist}, ${art.year}</p>
+          <p class="vg-meta">${art.medium}</p>
+        </div>
+      `;
+      card.addEventListener('click', () => openLightbox(i));
+      grid.appendChild(card);
+    });
+  }
+
+  // Lightbox
+  const lightbox = document.getElementById('lightbox');
+  function openLightbox(i){
+    const art = galleryArtworks[i];
+    document.getElementById('lightboxImg').src = art.image;
+    document.getElementById('lightboxImg').alt = `${art.title}, ${art.artist}`;
+    document.getElementById('lightboxTitle').textContent = art.title;
+    document.getElementById('lightboxArtist').textContent = `${art.artist}, ${art.year} — ${art.medium}`;
+    document.getElementById('lightboxDesc').textContent = art.description;
+    lightbox.classList.add('show');
+  }
+  function closeLightbox(){ lightbox.classList.remove('show'); }
+  document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
+
+  renderVirtualGallery();
+</script>
 
   // Mobile menu
   const menuToggle = document.getElementById('menuToggle');
