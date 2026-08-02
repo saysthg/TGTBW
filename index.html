@@ -330,6 +330,8 @@
     justify-content:center;
     text-align:center;
     padding: 20px;
+    position: relative;
+    overflow: hidden;
   }
   .placeholder-img span{
     font-family: var(--font-mono);
@@ -549,6 +551,61 @@
     white-space: nowrap;
   }
   .lightbox-close:hover{ background: rgba(231,227,216,0.12); }
+
+  /* ============================================================
+     DRAG-AND-DROP IMAGE EDITING (edit mode)
+     ============================================================ */
+  .upload-overlay{
+    position: absolute;
+    inset: 0;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: rgba(21,19,13,0.6);
+    border: 2px dashed rgba(231,227,216,0.65);
+    color: var(--paper);
+    text-align: center;
+    padding: 16px;
+    cursor: pointer;
+    z-index: 6;
+  }
+  body.edit-mode .upload-overlay{ display: flex; }
+  .upload-overlay:hover{ background: rgba(21,19,13,0.72); }
+  .upload-overlay.dragover{
+    background: rgba(163,42,30,0.55);
+    border-color: var(--accent);
+  }
+  .upload-overlay .prompt{
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    line-height: 1.6;
+  }
+  .upload-overlay .reset-link{
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    text-decoration: underline;
+    color: rgba(231,227,216,0.8);
+  }
+
+  .edit-mode-banner{
+    display: none;
+    background: var(--accent);
+    color: var(--paper-alt);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.03em;
+    text-align: center;
+    padding: 10px var(--gutter);
+  }
+  body.edit-mode .edit-mode-banner{ display: block; }
+
+  #editModeBtn.active{ background: var(--ink); color: var(--paper); }
 
   /* ============================================================
      SHOP
@@ -782,6 +839,8 @@
       <a href="#contact">Contact</a>
     </nav>
     <div class="nav-right">
+      <button class="bag-btn" id="editModeBtn" type="button" hidden>✎ Edit Photos</button>
+      <button class="bag-btn" id="lockEditorBtn" type="button" hidden title="Hide editing tools on this browser">🔒</button>
       <button class="bag-btn" id="bagBtn">Bag (0)</button>
       <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -790,15 +849,20 @@
   </div>
 </header>
 
+<div class="edit-mode-banner">
+  Edit mode is on — drag a photo onto any image to swap it. This saves in <em>this browser only</em>, so use it to preview and choose your photos, then copy the final image files into the project before you publish.
+</div>
+
 <!-- ============================================================
      HERO
      ============================================================ -->
 <section class="hero" id="home">
-  <p class="eyebrow"><!-- EDIT: your city / founding year --> Visual Merchandising &amp; Styling Studio — Est. 2026 </p>
+  <p class="eyebrow"><!-- EDIT: your city / founding year --> Visual Merchandising &amp; Styling Studio — Est. [Year]</p>
   <h1>Too good<br>to <em>begin</em><br>with.</h1>
   <p class="hero-sub">
     <!-- EDIT: your positioning statement -->
-    Let inspiration bloom at the point of beginning.
+    A styling and merchandising practice for brands who'd rather get it right than get it out fast.
+    Windows, retail interiors, sets and shelf-edges, treated like the compositions they are.
   </p>
   <div class="hero-cta">
     <a href="#work" class="btn btn-solid">View the work</a>
@@ -840,7 +904,7 @@
       path or URL when you have one — everything else stays the same.
     -->
     <a href="#" class="work-item" data-cat="window">
-      <div class="placeholder-img"><img src="https://picsum.photos/seed/tggtbw01/800/1000" alt="Flagship window display, [Client]" loading="lazy"></div>
+      <div class="placeholder-img" data-img-id="work-01"><img src="https://picsum.photos/seed/tggtbw01/800/1000" alt="Flagship window display, [Client]" loading="lazy"></div>
       <div class="work-label">
         <span class="num">No. 01</span>
         <div class="meta">
@@ -850,7 +914,7 @@
       </div>
     </a>
     <a href="#" class="work-item" data-cat="retail">
-      <div class="placeholder-img"><img src="https://picsum.photos/seed/tggtbw02/800/1000" alt="Store relaunch, [Client]" loading="lazy"></div>
+      <div class="placeholder-img" data-img-id="work-02"><img src="https://picsum.photos/seed/tggtbw02/800/1000" alt="Store relaunch, [Client]" loading="lazy"></div>
       <div class="work-label">
         <span class="num">No. 02</span>
         <div class="meta">
@@ -860,7 +924,7 @@
       </div>
     </a>
     <a href="#" class="work-item" data-cat="editorial">
-      <div class="placeholder-img"><img src="https://picsum.photos/seed/tggtbw03/800/1000" alt="Campaign set, [Publication]" loading="lazy"></div>
+      <div class="placeholder-img" data-img-id="work-03"><img src="https://picsum.photos/seed/tggtbw03/800/1000" alt="Campaign set, [Publication]" loading="lazy"></div>
       <div class="work-label">
         <span class="num">No. 03</span>
         <div class="meta">
@@ -870,7 +934,7 @@
       </div>
     </a>
     <a href="#" class="work-item" data-cat="installation">
-      <div class="placeholder-img"><img src="https://picsum.photos/seed/tggtbw04/800/1000" alt="Pop-up installation, [Client]" loading="lazy"></div>
+      <div class="placeholder-img" data-img-id="work-04"><img src="https://picsum.photos/seed/tggtbw04/800/1000" alt="Pop-up installation, [Client]" loading="lazy"></div>
       <div class="work-label">
         <span class="num">No. 04</span>
         <div class="meta">
@@ -880,7 +944,7 @@
       </div>
     </a>
     <a href="#" class="work-item" data-cat="window">
-      <div class="placeholder-img"><img src="https://picsum.photos/seed/tggtbw05/800/1000" alt="Seasonal window, [Client]" loading="lazy"></div>
+      <div class="placeholder-img" data-img-id="work-05"><img src="https://picsum.photos/seed/tggtbw05/800/1000" alt="Seasonal window, [Client]" loading="lazy"></div>
       <div class="work-label">
         <span class="num">No. 05</span>
         <div class="meta">
@@ -890,7 +954,7 @@
       </div>
     </a>
     <a href="#" class="work-item" data-cat="retail">
-      <div class="placeholder-img"><img src="https://picsum.photos/seed/tggtbw06/800/1000" alt="Concept store, [Client]" loading="lazy"></div>
+      <div class="placeholder-img" data-img-id="work-06"><img src="https://picsum.photos/seed/tggtbw06/800/1000" alt="Concept store, [Client]" loading="lazy"></div>
       <div class="work-label">
         <span class="num">No. 06</span>
         <div class="meta">
@@ -960,7 +1024,7 @@
     <!-- EDIT: replace each product block with your real items -->
     <div class="product">
       <span class="tag-corner">Lot 01</span>
-      <div class="placeholder-img"><img src="https://picsum.photos/seed/tggtbwshop01/800/1000" alt="[Product Name]" loading="lazy"></div>
+      <div class="placeholder-img" data-img-id="shop-01"><img src="https://picsum.photos/seed/tggtbwshop01/800/1000" alt="[Product Name]" loading="lazy"></div>
       <div class="product-info">
         <div>
           <p class="product-title">[Product Name]</p>
@@ -972,7 +1036,7 @@
     </div>
     <div class="product">
       <span class="tag-corner">Lot 02</span>
-      <div class="placeholder-img"><img src="https://picsum.photos/seed/tggtbwshop02/800/1000" alt="[Product Name]" loading="lazy"></div>
+      <div class="placeholder-img" data-img-id="shop-02"><img src="https://picsum.photos/seed/tggtbwshop02/800/1000" alt="[Product Name]" loading="lazy"></div>
       <div class="product-info">
         <div>
           <p class="product-title">[Product Name]</p>
@@ -984,7 +1048,7 @@
     </div>
     <div class="product">
       <span class="tag-corner">Lot 03</span>
-      <div class="placeholder-img"><img src="https://picsum.photos/seed/tggtbwshop03/800/1000" alt="[Product Name]" loading="lazy"></div>
+      <div class="placeholder-img" data-img-id="shop-03"><img src="https://picsum.photos/seed/tggtbwshop03/800/1000" alt="[Product Name]" loading="lazy"></div>
       <div class="product-info">
         <div>
           <p class="product-title">[Product Name]</p>
@@ -1107,7 +1171,7 @@
 <footer>
   <div class="footer-inner">
     <p class="footer-mark">Too Good<br>To Begin With</p>
-    <p class="footer-meta">© <span id="year"></span> Too Good To Begin With<br>Visual Merchandising &amp; Styling Studio</p>
+    <p class="footer-meta">© <span id="year"></span> Too Good To Begin With<br>Visual Merchandising &amp; Styling Studio<br><a href="#" id="studioLoginLink" style="color:inherit;text-decoration:none;opacity:0.55;">Studio</a></p>
   </div>
 </footer>
 
@@ -1116,6 +1180,83 @@
 <script>
   // Year stamp
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  /* ============================================================
+     EDITOR ACCESS GATE
+     ============================================================
+     The "Edit Photos" button is hidden from every visitor by default.
+     It only appears once unlocked, two ways:
+
+       1. Secret URL — visit the site with ?studio=YOUR-CODE on the end,
+          e.g. https://yoursite.com/?studio=peony27
+          The button then stays unlocked on that browser going forward.
+
+       2. Password — click the small "Studio" link at the very bottom
+          of the footer and enter the same code when prompted.
+
+     CHANGE THIS CODE before you publish the site — it's the only thing
+     standing between a visitor and the edit tools:
+  */
+  const EDIT_ACCESS_CODE = "peony27"; // ← EDIT: set your own password/code here
+
+  /* HONEST LIMITATION — read this before relying on it:
+     This is a front-door lock, not a vault. The code above lives in this
+     file's source, so anyone who views the page source could technically
+     find it. It's enough to keep casual visitors from stumbling into
+     edit mode, but it is NOT real security for anything sensitive. True
+     protection (a login only you can pass) requires a server to check
+     the password, which a plain HTML file can't do on its own.
+  */
+  const EDITOR_UNLOCK_KEY = 'tggtbw_editor_unlocked';
+
+  function unlockEditor(){
+    localStorage.setItem(EDITOR_UNLOCK_KEY, 'true');
+    document.getElementById('editModeBtn').hidden = false;
+    document.getElementById('lockEditorBtn').hidden = false;
+  }
+  function lockEditor(){
+    localStorage.removeItem(EDITOR_UNLOCK_KEY);
+    document.body.classList.remove('edit-mode');
+    const btn = document.getElementById('editModeBtn');
+    btn.hidden = true;
+    btn.classList.remove('active');
+    btn.textContent = '✎ Edit Photos';
+    document.getElementById('lockEditorBtn').hidden = true;
+  }
+
+  // Check for the secret URL (?studio=CODE)
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get('studio') === EDIT_ACCESS_CODE){
+    unlockEditor();
+    // Remove the code from the visible address bar once it's been used
+    urlParams.delete('studio');
+    const cleanUrl = window.location.pathname + (urlParams.toString() ? '?' + urlParams.toString() : '') + window.location.hash;
+    window.history.replaceState({}, '', cleanUrl);
+  }
+
+  // Stay unlocked on this browser once unlocked before
+  if (localStorage.getItem(EDITOR_UNLOCK_KEY) === 'true'){
+    document.getElementById('editModeBtn').hidden = false;
+    document.getElementById('lockEditorBtn').hidden = false;
+  }
+
+  document.getElementById('lockEditorBtn').addEventListener('click', () => {
+    lockEditor();
+    showToast('Editing tools hidden on this browser.');
+  });
+
+  // Password entry via the footer "Studio" link
+  document.getElementById('studioLoginLink').addEventListener('click', (e) => {
+    e.preventDefault();
+    const entered = window.prompt('Studio access code:');
+    if (entered === null) return;
+    if (entered === EDIT_ACCESS_CODE){
+      unlockEditor();
+      alert('Unlocked — the "Edit Photos" button is now in the top nav.');
+    } else {
+      alert('That code isn\'t right.');
+    }
+  });
 
   /* ============================================================
      VIRTUAL GALLERY — DROP-AND-INSERT ARTWORK LIST
@@ -1178,6 +1319,108 @@
 
   const statusLabel = { current: "On view", upcoming: "Upcoming", past: "Archived" };
 
+  /* ============================================================
+     DRAG-AND-DROP PHOTO UPLOAD
+     ============================================================
+     How it works: click "Edit Photos" in the nav to turn on edit mode.
+     Every image on the site gets a dashed drop-zone overlay — drag a
+     photo file onto it (or click it to pick a file) and it swaps in
+     instantly.
+
+     IMPORTANT — read this before you rely on it:
+     Swapped photos are saved with localStorage, which lives only in
+     THIS browser on THIS device. It's a fast way to preview real photos
+     in place and decide what you like — it does NOT upload anywhere,
+     does NOT change the file for other visitors, and will NOT survive
+     you clearing browser data. Once you're happy with a photo, open
+     this file's code, find the matching data-img-id (or the matching
+     entry in galleryArtworks for the Virtual Gallery), and replace the
+     src/image with your real hosted file — that's what makes it
+     permanent and visible to everyone.
+  */
+  const IMG_STORAGE_PREFIX = 'tggtbw_img_';
+
+  function wireImageUpload(container, imgId){
+    if (!container || container.dataset.uploadWired) return;
+    container.dataset.uploadWired = 'true';
+
+    const overlay = document.createElement('div');
+    overlay.className = 'upload-overlay';
+    overlay.innerHTML = `
+      <span class="prompt">Drop photo here<br>or click to upload</span>
+      <span class="reset-link" data-action="reset">Reset to default</span>
+    `;
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/*';
+    input.hidden = true;
+
+    container.appendChild(overlay);
+    container.appendChild(input);
+
+    function handleFile(file){
+      if (!file || !file.type.startsWith('image/')) return;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const dataUrl = e.target.result;
+        const img = container.querySelector('img');
+        if (img) img.src = dataUrl;
+        try {
+          localStorage.setItem(IMG_STORAGE_PREFIX + imgId, dataUrl);
+          showToast('Photo updated — saved in this browser for next time.');
+        } catch (err) {
+          showToast('Photo updated for now, but it was too large to save for next visit.');
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+
+    overlay.addEventListener('click', (e) => {
+      if (e.target.dataset.action === 'reset'){
+        e.stopPropagation();
+        localStorage.removeItem(IMG_STORAGE_PREFIX + imgId);
+        showToast('Reset — reload the page to see the default photo again.');
+        return;
+      }
+      input.click();
+    });
+    input.addEventListener('change', () => handleFile(input.files[0]));
+
+    ['dragenter', 'dragover'].forEach(evt => overlay.addEventListener(evt, (e) => {
+      e.preventDefault();
+      overlay.classList.add('dragover');
+    }));
+    ['dragleave', 'drop'].forEach(evt => overlay.addEventListener(evt, (e) => {
+      e.preventDefault();
+      overlay.classList.remove('dragover');
+    }));
+    overlay.addEventListener('drop', (e) => {
+      const file = e.dataTransfer.files && e.dataTransfer.files[0];
+      handleFile(file);
+    });
+
+    // Apply any previously-saved photo for this slot on load
+    const saved = localStorage.getItem(IMG_STORAGE_PREFIX + imgId);
+    if (saved){
+      const img = container.querySelector('img');
+      if (img) img.src = saved;
+    }
+  }
+
+  // Wire every static image on the page (portfolio + shop)
+  document.querySelectorAll('.placeholder-img[data-img-id]').forEach(el => {
+    wireImageUpload(el, el.dataset.imgId);
+  });
+
+  // Edit mode toggle
+  const editModeBtn = document.getElementById('editModeBtn');
+  editModeBtn.addEventListener('click', () => {
+    const on = document.body.classList.toggle('edit-mode');
+    editModeBtn.classList.toggle('active', on);
+    editModeBtn.textContent = on ? '✓ Done Editing' : '✎ Edit Photos';
+    if (on) showToast('Edit mode on — drag a photo onto any image to replace it.');
+  });
+
   function renderVirtualGallery(){
     const grid = document.getElementById('vgalleryGrid');
     const empty = document.getElementById('vgalleryEmpty');
@@ -1190,13 +1433,15 @@
     empty.style.display = 'none';
 
     galleryArtworks.forEach((art, i) => {
+      const imgId = `vgallery-${i}`;
+      const savedSrc = localStorage.getItem(IMG_STORAGE_PREFIX + imgId) || art.image;
       const card = document.createElement('button');
       card.className = 'vgallery-card';
       card.type = 'button';
       card.setAttribute('aria-label', `View ${art.title} by ${art.artist}`);
       card.innerHTML = `
-        <div class="frame">
-          <img src="${art.image}" alt="${art.title}, ${art.artist}" loading="lazy">
+        <div class="frame" data-img-id="${imgId}">
+          <img src="${savedSrc}" alt="${art.title}, ${art.artist}" loading="lazy">
           <span class="badge">${statusLabel[art.status] || art.status}</span>
         </div>
         <div class="vgallery-label">
@@ -1205,8 +1450,13 @@
           <p class="vg-meta">${art.medium}</p>
         </div>
       `;
-      card.addEventListener('click', () => openLightbox(i));
+      card.addEventListener('click', (e) => {
+        // Ignore clicks that landed on the upload overlay — those are for editing, not viewing
+        if (e.target.closest('.upload-overlay')) return;
+        openLightbox(i);
+      });
       grid.appendChild(card);
+      wireImageUpload(card.querySelector('.frame'), imgId);
     });
   }
 
@@ -1214,7 +1464,8 @@
   const lightbox = document.getElementById('lightbox');
   function openLightbox(i){
     const art = galleryArtworks[i];
-    document.getElementById('lightboxImg').src = art.image;
+    const savedSrc = localStorage.getItem(IMG_STORAGE_PREFIX + `vgallery-${i}`) || art.image;
+    document.getElementById('lightboxImg').src = savedSrc;
     document.getElementById('lightboxImg').alt = `${art.title}, ${art.artist}`;
     document.getElementById('lightboxTitle').textContent = art.title;
     document.getElementById('lightboxArtist').textContent = `${art.artist}, ${art.year} — ${art.medium}`;
@@ -1229,59 +1480,6 @@
   renderVirtualGallery();
 </script>
 
-  // Mobile menu
-  const menuToggle = document.getElementById('menuToggle');
-  const navLinks = document.getElementById('navLinks');
-  menuToggle.addEventListener('click', () => {
-    const open = navLinks.classList.toggle('open');
-    menuToggle.setAttribute('aria-expanded', open);
-  });
-  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-    navLinks.classList.remove('open');
-    menuToggle.setAttribute('aria-expanded', 'false');
-  }));
-
-  // Gallery filter
-  const filters = document.getElementById('filters');
-  const items = document.querySelectorAll('#galleryGrid .work-item');
-  filters.addEventListener('click', (e) => {
-    const btn = e.target.closest('.filter-chip');
-    if (!btn) return;
-    filters.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
-    btn.classList.add('active');
-    const f = btn.dataset.filter;
-    items.forEach(item => {
-      item.classList.toggle('hidden', f !== 'all' && item.dataset.cat !== f);
-    });
-  });
-
-  // Toast helper
-  const toast = document.getElementById('toast');
-  let toastTimer;
-  function showToast(msg){
-    toast.textContent = msg;
-    toast.classList.add('show');
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => toast.classList.remove('show'), 2600);
-  }
-
-  // Cart stub — client-side only. Swap for a real commerce SDK when ready.
-  let cartCount = 0;
-  const bagBtn = document.getElementById('bagBtn');
-  document.querySelectorAll('.add-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      cartCount++;
-      bagBtn.textContent = `Bag (${cartCount})`;
-      showToast(`Added "${btn.dataset.product}" — connect a commerce backend to complete checkout.`);
-    });
-  });
-
-  // Contact form stub — replace with a real submit handler (Formspree, backend endpoint, etc.)
-  document.getElementById('contactForm').addEventListener('submit', (e) => {
-    e.preventDefault();
-    showToast('Form captured — connect this to your email service or backend to receive inquiries.');
-    e.target.reset();
-  });
 </script>
 
 </body>
